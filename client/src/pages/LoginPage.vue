@@ -61,7 +61,6 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuth } from '../stores/auth';
 
-// Importación del escudo institucional desde assets
 import logoEsfmImg from '@/assets/logo-esfm.png';
 const logoEsfm = ref(logoEsfmImg);
 
@@ -83,7 +82,7 @@ async function entrar() {
 }
 
 function recuperarPassword() {
-  // Acción para recuperación de contraseña si aplica
+  // Acción para recuperación de contraseña
 }
 </script>
 
