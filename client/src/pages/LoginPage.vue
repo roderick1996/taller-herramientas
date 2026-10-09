@@ -1,48 +1,58 @@
 <template>
-  <div class="login">
-    <section class="hero">
-      <div class="cinta" />
-      <div class="hero-in">
-        <!-- Logo circular de la especialidad importado -->
-        <div class="logo-circular-container">
-          <img :src="logoEspecialidad" alt="Mecánica Automotriz" class="logo-especialidad-img" />
-        </div>
-        <h1 class="titulo">Taller de Mecánica<br />Automotriz</h1>
-        <p>Cada herramienta con su dueño temporal y su hora de regreso.</p>
-        <ul>
-          <li><q-icon name="notifications_active" /> Alerta cuando algo no se devuelve</li>
-          <li><q-icon name="inventory_2" /> Stock del taller al día</li>
-          <li><q-icon name="picture_as_pdf" /> Reportes listos para imprimir o abrir en Excel</li>
-        </ul>
+  <div class="login-page-container">
+    <div class="login-card">
+      <!-- Escudo y Nombre Institucional -->
+      <div class="institutional-header">
+        <img :src="logoEsfm" alt="ESFM José David Berríos" class="esfm-main-logo" />
+        <h2 class="institutional-title">ESFM "JOSÉ DAVID BERRÍOS"</h2>
       </div>
-    </section>
-    
-    <section class="lado">
-      <q-form class="caja panel q-pa-lg" @submit="entrar">
-        <!-- Logo de la ESFM importado -->
-        <div class="text-center q-mb-md">
-          <img :src="logoEsfm" alt="ESFM José David Berríos" class="esfm-logo-login" />
-          <div class="text-weight-bold text-subtitle1 q-mt-xs text-grey-9">ESFM "JOSÉ DAVID BERRÍOS"</div>
-        </div>
 
-        <div class="titulo text-h5 text-center">Ingresar</div>
-        <div class="text-grey text-center q-mb-md">Usa tu usuario del taller</div>
+      <!-- Formulario de Acceso -->
+      <q-form class="login-form" @submit="entrar">
+        <div class="form-subtitle">Iniciar sesión - Taller de Mecánica Automotriz</div>
 
-        <q-input v-model="usuario" outlined label="Usuario" autofocus autocomplete="username" :rules="[(v) => !!v || 'Escribe tu usuario']" class="q-mb-sm">
+        <q-input 
+          v-model="usuario" 
+          outlined 
+          dense
+          label="Usuario" 
+          autofocus 
+          autocomplete="username" 
+          :rules="[(v) => !!v || 'Escribe tu usuario']" 
+          class="q-mb-sm"
+        >
           <template #prepend><q-icon name="person" /></template>
         </q-input>
 
-        <q-input v-model="password" outlined label="Contraseña" :type="ver ? 'text' : 'password'" autocomplete="current-password"
-                 :rules="[(v) => !!v || 'Escribe tu contraseña']">
+        <q-input 
+          v-model="password" 
+          outlined 
+          dense
+          label="Contraseña" 
+          :type="ver ? 'text' : 'password'" 
+          autocomplete="current-password"
+          :rules="[(v) => !!v || 'Escribe tu contraseña']"
+        >
           <template #prepend><q-icon name="lock" /></template>
           <template #append>
             <q-icon :name="ver ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="ver = !ver" />
           </template>
         </q-input>
 
-        <q-btn type="submit" unelevated no-caps size="lg" class="full-width q-mt-md btn-amarillo" label="Ingresar" :loading="cargando" />
+        <q-btn 
+          type="submit" 
+          unelevated 
+          no-caps 
+          class="full-width q-mt-md btn-acceder" 
+          label="Acceder" 
+          :loading="cargando" 
+        />
+
+        <div class="login-footer q-mt-md text-center">
+          <a href="#" @click.prevent="recuperarPassword" class="text-grey-7">¿Olvidé mi contraseña?</a>
+        </div>
       </q-form>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -51,12 +61,9 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuth } from '../stores/auth';
 
-// Importación directa de las imágenes desde la carpeta assets
+// Importación del escudo institucional desde assets
 import logoEsfmImg from '@/assets/logo-esfm.png';
-import logoEspecialidadImg from '@/assets/logo-especialidad.png';
-
 const logoEsfm = ref(logoEsfmImg);
-const logoEspecialidad = ref(logoEspecialidadImg);
 
 const router = useRouter();
 const auth = useAuth();
@@ -74,52 +81,82 @@ async function entrar() {
     cargando.value = false;
   }
 }
+
+function recuperarPassword() {
+  // Acción para recuperación de contraseña si aplica
+}
 </script>
 
 <style scoped>
-.login { min-height: 100vh; display: grid; grid-template-columns: 1.1fr 1fr; background: var(--bg); }
-.hero { position: relative; background: #1c232b; color: #fff; display: flex; flex-direction: column;
-  background-image: radial-gradient(circle, #3a4652 2px, transparent 2.5px); background-size: 28px 28px; }
-.hero .cinta { height: 14px; }
-.hero-in { margin: auto; padding: 40px; max-width: 520px; }
-
-/* Contenedor circular estético */
-.logo-circular-container {
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  background: #ffffff;
+.login-page-container {
+  min-height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  border: 3px solid rgba(255, 255, 255, 0.2);
-  margin-bottom: 20px;
+  align-items: center;
+  background: linear-gradient(135deg, #1c232b 0%, #3a4652 100%);
+  background-image: radial-gradient(circle, #4a5568 2px, transparent 2.5px);
+  background-size: 28px 28px;
+  padding: 20px;
+}
+
+.login-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 16px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+  padding: 30px 25px;
   overflow: hidden;
 }
 
-.logo-especialidad-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.institutional-header {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #edf2f7;
+  margin-bottom: 20px;
 }
 
-/* Estilo para el logo de la ESFM en la tarjeta */
-.esfm-logo-login {
-  width: 75px;
-  height: auto;
+.esfm-main-logo {
+  width: 110px;
+  height: 110px;
   object-fit: contain;
+  margin-bottom: 12px;
 }
 
-h1 { font-size: 52px; line-height: 0.95; margin: 16px 0 14px; }
-p { font-size: 16px; color: #b8c4d0; }
-ul { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 10px; color: #dbe3ea; }
-li .q-icon { color: var(--q-accent); margin-right: 8px; }
-.lado { display: grid; place-items: center; padding: 24px; }
-.caja { width: 100%; max-width: 420px; border-radius: 12px; }
+.institutional-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #2d3748;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
 
-@media (max-width: 900px) { 
-  .login { grid-template-columns: 1fr; } 
-  .hero { display: none; } 
+.form-subtitle {
+  font-size: 0.95rem;
+  color: #4a5568;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.btn-acceder {
+  background-color: #4a5568;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 10px 0;
+  font-size: 1rem;
+}
+
+.btn-acceder:hover {
+  background-color: #2d3748;
+}
+
+.login-footer a {
+  font-size: 0.85rem;
+  text-decoration: underline;
+}
+
+.login-footer a:hover {
+  color: #2d3748;
 }
 </style>
