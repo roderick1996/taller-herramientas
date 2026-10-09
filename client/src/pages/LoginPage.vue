@@ -3,7 +3,7 @@
     <div class="login-card">
       <!-- Escudo y Nombre Institucional -->
       <div class="institutional-header">
-        <img src="/logo-esfm.png" alt="ESFM José David Berríos" class="esfm-main-logo" />
+        <img :src="logoEsfm" alt="ESFM José David Berríos" class="esfm-main-logo" />
         <h2 class="institutional-title">ESFM "JOSÉ DAVID BERRÍOS"</h2>
       </div>
 
@@ -60,6 +60,10 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuth } from '../stores/auth';
+
+// Importación directa del escudo desde assets de forma segura
+import logoEsfmImage from '@/assets/logo-esfm.png';
+const logoEsfm = ref(logoEsfmImage);
 
 const router = useRouter();
 const auth = useAuth();
