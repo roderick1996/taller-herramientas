@@ -3,9 +3,9 @@
     <section class="hero">
       <div class="cinta" />
       <div class="hero-in">
-        <!-- Logo de la especialidad con diseño circular estético -->
+        <!-- Logo circular de la especialidad importado -->
         <div class="logo-circular-container">
-          <img src="@/assets/logo-especialidad.png" alt="Mecánica Automotriz" class="logo-especialidad-img" />
+          <img :src="logoEspecialidad" alt="Mecánica Automotriz" class="logo-especialidad-img" />
         </div>
         <h1 class="titulo">Taller de Mecánica<br />Automotriz</h1>
         <p>Cada herramienta con su dueño temporal y su hora de regreso.</p>
@@ -19,14 +19,14 @@
     
     <section class="lado">
       <q-form class="caja panel q-pa-lg" @submit="entrar">
-        <!-- Logo de la ESFM y título institucional en la tarjeta de login -->
+        <!-- Logo de la ESFM importado -->
         <div class="text-center q-mb-md">
-          <img src="@/assets/logo-esfm.png" alt="ESFM José David Berríos" class="esfm-logo-login" />
+          <img :src="logoEsfm" alt="ESFM José David Berríos" class="esfm-logo-login" />
           <div class="text-weight-bold text-subtitle1 q-mt-xs text-grey-9">ESFM "JOSÉ DAVID BERRÍOS"</div>
         </div>
 
         <div class="titulo text-h5 text-center">Ingresar</div>
-        <div class="text-grey text-center q-mb-md">Taller de Mecánica Automotriz</div>
+        <div class="text-grey text-center q-mb-md">Usa tu usuario del taller</div>
 
         <q-input v-model="usuario" outlined label="Usuario" autofocus autocomplete="username" :rules="[(v) => !!v || 'Escribe tu usuario']" class="q-mb-sm">
           <template #prepend><q-icon name="person" /></template>
@@ -50,6 +50,13 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuth } from '../stores/auth';
+
+// Importación directa de las imágenes desde la carpeta assets
+import logoEsfmImg from '@/assets/logo-esfm.png';
+import logoEspecialidadImg from '@/assets/logo-especialidad.png';
+
+const logoEsfm = ref(logoEsfmImg);
+const logoEspecialidad = ref(logoEspecialidadImg);
 
 const router = useRouter();
 const auth = useAuth();
@@ -76,7 +83,7 @@ async function entrar() {
 .hero .cinta { height: 14px; }
 .hero-in { margin: auto; padding: 40px; max-width: 520px; }
 
-/* Contenedor circular estético para el logo de la especialidad */
+/* Contenedor circular estético */
 .logo-circular-container {
   width: 88px;
   height: 88px;
@@ -97,7 +104,7 @@ async function entrar() {
   object-fit: cover;
 }
 
-/* Estilo para el logo de la ESFM en la tarjeta de login */
+/* Estilo para el logo de la ESFM en la tarjeta */
 .esfm-logo-login {
   width: 75px;
   height: auto;
