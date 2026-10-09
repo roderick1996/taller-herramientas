@@ -1,0 +1,15 @@
+{
+  "name": "taller-herramientas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sistema de control de préstamo de herramientas - Taller de Mecánica Automotriz (ESFM)",
+  "scripts": {
+    "install:all": "npm install && npm --prefix server install && npm --prefix client install",
+    "db:setup": "npm --prefix server run setup",
+    "db:demo": "npm --prefix server run seed:demo",
+    "dev": "concurrently -n api,web -c yellow,cyan \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
+    "build": "npm --prefix client run build",
+    "start": "npm --prefix server start"
+  },
+  "devDependencies": { "concurrently": "^9.0.1" }
+}

@@ -1,0 +1,16 @@
+# Base de datos PostgreSQL lista para usar:  docker compose up -d
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: taller_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: taller
+    ports:
+      - "5432:5432"
+    volumes:
+      - taller_pgdata:/var/lib/postgresql/data
+volumes:
+  taller_pgdata:

@@ -1,0 +1,98 @@
+/* Taller de Mecánica · identidad: grafito de cajonera, amarillo de seguridad y acero */
+:root {
+  --q-primary: #2d5f8b;
+  --q-secondary: #1c232b;
+  --q-accent: #ffbe0b;
+  --q-positive: #2f9e63;
+  --q-negative: #d93a2b;
+  --q-warning: #e8890c;
+  --q-info: #3b82b8;
+  --bg: #e8ecf0;
+  --card: #ffffff;
+  --ink: #1c232b;
+  --muted: #5b6b7a;
+  --line: #cfd6dd;
+  --radius: 8px;
+  --hazard: repeating-linear-gradient(-45deg, #ffbe0b 0 12px, #1c232b 12px 24px);
+}
+body.body--dark {
+  --bg: #12171d; --card: #1b232c; --ink: #e6ebf0; --muted: #8fa0b0; --line: #2c3844;
+}
+body, body.body--dark {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Barlow', system-ui, sans-serif;
+  font-size: 15px;
+}
+.titulo, .q-table__title {
+  font-family: 'Barlow Condensed', 'Barlow', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.q-layout, .q-page-container, .q-page { background: transparent; }
+.text-grey, .text-grey-7 { color: var(--muted) !important; }
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.page { padding: 20px; max-width: 1520px; margin: 0 auto; }
+.seccion { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; margin-bottom: 8px; }
+
+.q-btn, .q-field--outlined .q-field__control, .q-field--outlined .q-field__control:before { border-radius: var(--radius); }
+.q-btn { font-weight: 600; }
+.btn-amarillo { background: var(--q-accent) !important; color: #1c232b !important; }
+
+.q-table { background: transparent; color: var(--ink); }
+.q-table thead th { font-weight: 600; color: var(--muted); }
+.q-table tbody td { font-size: 14px; }
+.q-table--dark { color: var(--ink); }
+.q-card { background: var(--card); color: var(--ink); border-radius: var(--radius); }
+.q-menu { background: var(--card); color: var(--ink); }
+.q-dialog__backdrop { background: rgba(10, 16, 22, 0.6); }
+
+/* Cabecera y menú lateral */
+.app-header { background: var(--card) !important; color: var(--ink) !important; border-bottom: 1px solid var(--line); }
+.app-drawer .q-drawer { background: #1c232b; color: #c9d3dd; }
+.app-drawer .q-drawer__content { display: flex; flex-direction: column; }
+.marca { padding: 16px 16px 14px; color: #fff; display: flex; gap: 12px; align-items: center; }
+.marca .logo { width: 42px; height: 42px; border-radius: 8px; background: var(--q-accent); color: #1c232b; display: grid; place-items: center; }
+.marca .nombre { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 21px; line-height: 1; }
+.marca .sub { font-size: 12px; color: #8fa0b0; margin-top: 3px; }
+.cinta { height: 8px; background: var(--hazard); }
+.nav-item { border-radius: 8px; margin: 2px 10px; min-height: 44px; color: #c9d3dd; }
+.nav-item .q-icon { color: #8fa0b0; }
+.nav-item.nav-activo { background: #2a3440; color: #fff; box-shadow: inset 4px 0 0 var(--q-accent); }
+.nav-item.nav-activo .q-icon { color: var(--q-accent); }
+.nav-nuevo { background: var(--q-accent); color: #1c232b; font-weight: 700; }
+.nav-nuevo .q-icon { color: #1c232b !important; }
+.nav-nuevo.nav-activo { background: var(--q-accent); color: #1c232b; box-shadow: none; }
+
+/* Panel: fichas de indicadores como etiquetas de herramienta */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.stat { padding: 14px 16px 12px; border-top: 5px solid var(--tono, var(--q-primary)); display: flex; align-items: center; gap: 14px; }
+.stat .valor { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 40px; line-height: 1; }
+.stat .etq { color: var(--muted); font-size: 13px; margin-top: 4px; }
+.stat .q-icon { color: var(--tono, var(--q-primary)); opacity: 0.85; }
+
+/* Alerta con cinta de peligro */
+.alerta-banner { border-radius: var(--radius); background: #1c232b; color: #fff; border: 1px solid #1c232b; overflow: hidden; }
+.alerta-banner:before { content: ''; display: block; height: 8px; background: var(--hazard); margin: -8px -16px 8px; }
+.pulso { animation: pulso 1.6s ease-in-out infinite; }
+@keyframes pulso { 50% { box-shadow: 0 0 0 5px rgba(217, 58, 43, 0.28); } }
+
+/* Herramientas en el nuevo préstamo */
+.rejilla-herr { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
+.herr { padding: 12px; display: flex; flex-direction: column; gap: 8px; transition: border-color 0.15s, background 0.15s; }
+.herr.elegida { border-color: var(--q-accent); background: color-mix(in srgb, var(--q-accent) 12%, var(--card)); }
+.herr.agotada { opacity: 0.5; }
+.herr .nom { font-weight: 600; line-height: 1.2; min-height: 36px; }
+.cant { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 24px; min-width: 28px; text-align: center; }
+
+.fade-enter-active, .fade-leave-active { transition: opacity 0.15s; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
+
+@media (max-width: 600px) { .page { padding: 12px; } .stat .valor { font-size: 34px; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+@media print { .q-header, .q-drawer, .no-print { display: none !important; } }
