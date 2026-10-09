@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { Notify } from 'quasar';
 
-export const api = axios.create({ baseURL: '/api', timeout: 30000 });
+export const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || '/api',
+  timeout: 30000
+});
 
 api.interceptors.request.use((cfg) => {
   const t = localStorage.getItem('token');
