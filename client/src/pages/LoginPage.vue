@@ -3,7 +3,10 @@
     <section class="hero">
       <div class="cinta" />
       <div class="hero-in">
-        <div class="logo"><q-icon name="build" size="40px" /></div>
+        <!-- Logo de la especialidad con diseño circular estético -->
+        <div class="logo-circular-container">
+          <img src="@/assets/logo-especialidad.png" alt="Mecánica Automotriz" class="logo-especialidad-img" />
+        </div>
         <h1 class="titulo">Taller de Mecánica<br />Automotriz</h1>
         <p>Cada herramienta con su dueño temporal y su hora de regreso.</p>
         <ul>
@@ -13,13 +16,22 @@
         </ul>
       </div>
     </section>
+    
     <section class="lado">
       <q-form class="caja panel q-pa-lg" @submit="entrar">
-        <div class="titulo text-h4">Ingresar</div>
-        <div class="text-grey q-mb-md">Usa tu usuario del taller</div>
-        <q-input v-model="usuario" outlined label="Usuario" autofocus autocomplete="username" :rules="[(v) => !!v || 'Escribe tu usuario']">
+        <!-- Logo de la ESFM y título institucional en la tarjeta de login -->
+        <div class="text-center q-mb-md">
+          <img src="@/assets/logo-esfm.png" alt="ESFM José David Berríos" class="esfm-logo-login" />
+          <div class="text-weight-bold text-subtitle1 q-mt-xs text-grey-9">ESFM "JOSÉ DAVID BERRÍOS"</div>
+        </div>
+
+        <div class="titulo text-h5 text-center">Ingresar</div>
+        <div class="text-grey text-center q-mb-md">Taller de Mecánica Automotriz</div>
+
+        <q-input v-model="usuario" outlined label="Usuario" autofocus autocomplete="username" :rules="[(v) => !!v || 'Escribe tu usuario']" class="q-mb-sm">
           <template #prepend><q-icon name="person" /></template>
         </q-input>
+
         <q-input v-model="password" outlined label="Contraseña" :type="ver ? 'text' : 'password'" autocomplete="current-password"
                  :rules="[(v) => !!v || 'Escribe tu contraseña']">
           <template #prepend><q-icon name="lock" /></template>
@@ -27,7 +39,8 @@
             <q-icon :name="ver ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="ver = !ver" />
           </template>
         </q-input>
-        <q-btn type="submit" unelevated no-caps size="lg" class="full-width q-mt-sm btn-amarillo" label="Ingresar" :loading="cargando" />
+
+        <q-btn type="submit" unelevated no-caps size="lg" class="full-width q-mt-md btn-amarillo" label="Ingresar" :loading="cargando" />
       </q-form>
     </section>
   </div>
@@ -62,12 +75,44 @@ async function entrar() {
   background-image: radial-gradient(circle, #3a4652 2px, transparent 2.5px); background-size: 28px 28px; }
 .hero .cinta { height: 14px; }
 .hero-in { margin: auto; padding: 40px; max-width: 520px; }
-.logo { width: 72px; height: 72px; border-radius: 12px; background: var(--q-accent); color: #1c232b; display: grid; place-items: center; }
-h1 { font-size: 64px; line-height: 0.95; margin: 22px 0 14px; }
-p { font-size: 18px; color: #b8c4d0; }
-ul { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 12px; color: #dbe3ea; }
+
+/* Contenedor circular estético para el logo de la especialidad */
+.logo-circular-container {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.logo-especialidad-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Estilo para el logo de la ESFM en la tarjeta de login */
+.esfm-logo-login {
+  width: 75px;
+  height: auto;
+  object-fit: contain;
+}
+
+h1 { font-size: 52px; line-height: 0.95; margin: 16px 0 14px; }
+p { font-size: 16px; color: #b8c4d0; }
+ul { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 10px; color: #dbe3ea; }
 li .q-icon { color: var(--q-accent); margin-right: 8px; }
 .lado { display: grid; place-items: center; padding: 24px; }
-.caja { width: 100%; max-width: 420px; }
-@media (max-width: 900px) { .login { grid-template-columns: 1fr; } .hero { display: none; } }
+.caja { width: 100%; max-width: 420px; border-radius: 12px; }
+
+@media (max-width: 900px) { 
+  .login { grid-template-columns: 1fr; } 
+  .hero { display: none; } 
+}
 </style>
