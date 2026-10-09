@@ -5,11 +5,14 @@ import helmet from 'helmet';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import bcrypt from 'bcryptjs';
+import { q } from './db.js';
 import routes from './routes.js';
 
 const app = express();
 const dir = path.dirname(fileURLToPath(import.meta.url));
 
+app.set('trust proxy', 1);
 app.use(helmet({ contentSecurityPolicy: false })); // el PDF se abre desde blob: en el navegador
 app.use(cors());
 app.use(express.json({ limit: '2mb' }));
@@ -36,5 +39,23 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ error: 'Error interno del servidor' });
 });
 
+async function asegurarAdmin() {
+  try {
+    const hash = await bcrypt.hash('admin123', 10);
+    await q(`
+      INSERT INTO usuarios (nombre, usuario, password_hash, rol)
+      VALUES ('Administrador', 'admin', $1, 'admin')
+      ON CONFLICT (usuario) 
+      DO UPDATE SET password_hash = $1;
+    `, [hash]);
+    console.log('✔ Usuario administrador verificado/actualizado');
+  } catch (e) {
+    console.error('Error al asegurar admin:', e.message);
+  }
+}
+
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`API del taller lista en http://localhost:${port}`));
+app.listen(port, async () => {
+  await asegurarAdmin();
+  console.log(`API del taller lista en http://localhost:${port}`);
+});
