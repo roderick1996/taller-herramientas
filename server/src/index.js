@@ -55,7 +55,9 @@ async function asegurarAdmin() {
 }
 
 const port = process.env.PORT || 3000;
-app.listen(port, async () => {
+if (!process.env.VERCEL) app.listen(port, async () => {
   await asegurarAdmin();
   console.log(`API del taller lista en http://localhost:${port}`);
 });
+
+export default app;
