@@ -46,9 +46,9 @@ async function asegurarAdmin() {
       INSERT INTO usuarios (nombre, usuario, password_hash, rol)
       VALUES ('Administrador', 'admin', $1, 'admin')
       ON CONFLICT (usuario) 
-      DO UPDATE SET password_hash = $1;
+      DO NOTHING;
     `, [hash]);
-    console.log('✔ Usuario administrador verificado/actualizado');
+    console.log('✔ Usuario administrador verificado');
   } catch (e) {
     console.error('Error al asegurar admin:', e.message);
   }
