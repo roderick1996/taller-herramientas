@@ -2,17 +2,11 @@ import axios from 'axios';
 import { Notify } from 'quasar';
 
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || window.location.origin + '/api',
+  baseURL: '/api',
   timeout: 30000
 });
 
-// Interceptor para atrapar y corregir cualquier URL vieja que esté hardcodeada en los componentes
 api.interceptors.request.use((cfg) => {
-  if (cfg.url && cfg.url.includes('onrender.com')) {
-    // Reemplaza la URL vieja de Render por la ruta relativa o la variable actual
-    cfg.url = cfg.url.replace(/https?:\/\/[^\/]+\/api/, '');
-  }
-  
   const t = localStorage.getItem('token');
   if (t) cfg.headers.Authorization = `Bearer ${t}`;
   return cfg;
