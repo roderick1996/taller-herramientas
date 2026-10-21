@@ -28,3 +28,22 @@ api.interceptors.response.use((r) => r, async (err) => {
   }
   return Promise.reject(err);
 });
+
+export async function archivo(url, nombre = 'archivo', params) {
+  const r = await api.get(url, { params, responseType: 'blob' });
+  const href = URL.createObjectURL(r.data);
+  const a = document.createElement('a');
+  a.href = href;
+  a.download = nombre;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(href), 10000);
+}
+
+export async function imprimir(url, params) {
+  const r = await api.get(url, { params, responseType: 'blob' });
+  const href = URL.createObjectURL(r.data);
+  const w = window.open(href, '_blank');
+  if (w) w.addEventListener('load', () => w.print());
+}
