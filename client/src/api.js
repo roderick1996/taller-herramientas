@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Notify } from 'quasar';
 
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: import.meta.env.VITE_API_URL || window.location.origin + '/api',
   timeout: 30000
 });
 
