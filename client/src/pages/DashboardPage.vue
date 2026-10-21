@@ -76,7 +76,7 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { useQuasar, date } from 'quasar';
 import { Bar, Doughnut } from 'vue-chartjs';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, ArcElement, Tooltip, Legend, Filler } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, LineElement, PointElement, ArcElement, Tooltip, Legend, Filler, LineController } from 'chart.js';
 import StatCard from '../components/StatCard.vue';
 import PrestamoDialog from '../components/PrestamoDialog.vue';
 import { api } from '../api';
@@ -84,7 +84,7 @@ import { useAuth } from '../stores/auth';
 import { useAlertas } from '../stores/alertas';
 import { atraso } from '../utils';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointElement, ArcElement, Tooltip, Legend, Filler);
+ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointElement, ArcElement, Tooltip, Legend, Filler, LineController);
 
 const $q = useQuasar();
 const auth = useAuth();
