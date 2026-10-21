@@ -6,7 +6,13 @@ export const api = axios.create({
   timeout: 30000
 });
 
+// Interceptor para atrapar y corregir cualquier URL vieja que esté hardcodeada en los componentes
 api.interceptors.request.use((cfg) => {
+  if (cfg.url && cfg.url.includes('onrender.com')) {
+    // Reemplaza la URL vieja de Render por la ruta relativa o la variable actual
+    cfg.url = cfg.url.replace(/https?:\/\/[^\/]+\/api/, '');
+  }
+  
   const t = localStorage.getItem('token');
   if (t) cfg.headers.Authorization = `Bearer ${t}`;
   return cfg;
@@ -29,7 +35,6 @@ api.interceptors.response.use((r) => r, async (err) => {
   return Promise.reject(err);
 });
 
-/** Abre (PDF) o descarga (Excel) un archivo generado por el servidor */
 export async function archivo(url, params = {}, { abrir = true, nombre = 'reporte' } = {}) {
   const { data } = await api.get(url, { params, responseType: 'blob' });
   const href = URL.createObjectURL(data);
@@ -44,7 +49,6 @@ export async function archivo(url, params = {}, { abrir = true, nombre = 'report
   setTimeout(() => URL.revokeObjectURL(href), 60000);
 }
 
-/** Manda el PDF directo a la impresora */
 export async function imprimir(url, params = {}) {
   const { data } = await api.get(url, { params, responseType: 'blob' });
   const href = URL.createObjectURL(data);
