@@ -96,3 +96,20 @@ body, body.body--dark {
 @media (max-width: 600px) { .page { padding: 12px; } .stat .valor { font-size: 34px; } }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 @media print { .q-header, .q-drawer, .no-print { display: none !important; } }
+/* Importar la fuente Inter desde Google Fonts (la más idéntica a Facebook) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Aplicar la fuente a todo el sistema */
+html, body, #q-app {
+  font-family: 'Inter', Helvetica, Arial, sans-serif, "Segoe UI" !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Aplicar la fuente a los títulos y encabezados */
+h1, h2, h3, h4, h5, h6, 
+.text-h1, .text-h2, .text-h3, .text-h4, .text-h5, .text-h6,
+.q-toolbar__title {
+  font-family: 'Inter', Helvetica, Arial, sans-serif, "Segoe UI" !important;
+  font-weight: 600;
+}
